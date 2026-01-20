@@ -29,3 +29,5 @@ app.use("/api/gemini", geminiRoute);
 app.listen(PORT, () => {
   console.log(`http://localhost:${PORT}`);
 });
+
+// all
