@@ -2,7 +2,7 @@ import { Button } from "../components/Button";
 
 const Hero: React.FC = () => {
   return (
-    <section className="relative w-full min-h-[85vh] flex items-center bg-gradient-to-br from-gray-50 via-white to-indigo-50/30 overflow-hidden">
+    <section className="relative w-full min-h-[85vh] flex items-center  from-gray-50 via-white to-indigo-50/30 overflow-hidden">
       <div className="absolute inset-0 opacity-10 pointer-events-none">
         <div className="absolute -top-24 -right-24 w-96 h-96 bg-indigo-200 rounded-full blur-3xl" />
         <div className="absolute -bottom-32 -left-20 w-80 h-80 bg-blue-200 rounded-full blur-3xl" />
@@ -29,16 +29,13 @@ const Hero: React.FC = () => {
                 <Button
                   variant="primary"
                   size="lg"
-                  shape="pill"
                   text="Create Resume"
                   onClick={() => alert("Create Resume clicked!")}
-                  fullWidthOnMobile
                 />
 
                 <Button
                   variant="secondary"
                   size="lg"
-                  shape="pill"
                   text="Upload & Optimize"
                   onClick={() => alert("Upload & Optimize clicked!")}
                 />
@@ -54,10 +51,10 @@ const Hero: React.FC = () => {
 
           <div className="relative flex justify-center lg:justify-end">
             <div className="relative w-full max-w-lg xl:max-w-xl">
-              <div className="absolute -inset-4 bg-gradient-to-br from-indigo-500/20 to-blue-500/10 rounded-3xl blur-xl opacity-70" />
+              <div className="absolute -inset-4  from-indigo-500/20 to-blue-500/10 rounded-3xl blur-xl opacity-70" />
 
               <img
-                src="/hero-resume-mockup.png"
+                src="https://officetemplatesonline.com/wp-content/uploads/2021/02/booklet-style-resume-template-for-ms-word-last-pages.jpg"
                 alt="Modern resume preview on laptop"
                 className="relative w-full rounded-2xl shadow-2xl ring-1 ring-gray-200/50 object-cover transform transition-transform duration-500 hover:scale-[1.02]"
                 width={1200}
