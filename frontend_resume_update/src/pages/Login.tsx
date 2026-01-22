@@ -21,9 +21,31 @@ export const Login: React.FC = () => {
     setForm((p) => ({ ...p, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Login:", form);
+
+    try {
+      const res = await fetch("http://localhost:5000/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.message || "Login failed");
+      }
+
+      console.log("Login Success:", data);
+
+      // ✅ Save token
+      localStorage.setItem("token", data.token);
+    } catch (error: any) {
+      console.error("Login Error:", error.message);
+    }
   };
 
   return (

@@ -26,10 +26,34 @@ export const ResumeCreateLeft: React.FC<Props> = ({ resumeData, setData }) => {
     setStep((s) => Math.max(s - 1, 0));
   };
 
-  const handleSubmit = () => {
-    console.log("FINAL RESUME DATA 👇");
-    console.log(resumeData);
-    alert("Resume data logged in console ✅");
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    try {
+      const token = localStorage.getItem("token");
+
+      if (!token) {
+        alert("Please login first!");
+        return;
+      }
+
+      const res = await fetch("http://localhost:9090/api/resume/create", {
+        method: "POST",
+        body: JSON.stringify(resumeData),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.message || "Failed to create resume");
+      }
+
+      console.log("Resume Created Successfully:", data);
+      alert("Resume created successfully! ✅");
+    } catch (error: any) {
+      console.error("Resume Creation Error:", error.message);
+      alert(`Error: ${error.message}`);
+    }
   };
 
   const handlePhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
