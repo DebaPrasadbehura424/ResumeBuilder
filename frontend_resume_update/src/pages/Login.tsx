@@ -41,7 +41,7 @@ export const Login: React.FC = () => {
           name="email"
           value={form.email}
           onChange={handleChange}
-          placeholder="Email"
+          placeholder="EMAIL"
           size="lg"
         />
 
@@ -50,7 +50,7 @@ export const Login: React.FC = () => {
           type="password"
           value={form.password}
           onChange={handleChange}
-          placeholder="Password"
+          placeholder="PASSWORD"
           size="lg"
         />
 
