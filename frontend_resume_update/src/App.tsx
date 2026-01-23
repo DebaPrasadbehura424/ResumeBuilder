@@ -7,6 +7,7 @@ import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
 import { Dashboard } from "./pages/Dashboard";
 import { ResumeCreate } from "./pages/ResumeCreate";
+import { Profile } from "./pages/Profile";
 
 function App() {
   return (
@@ -22,7 +23,10 @@ function App() {
 
         {/* dash */}
         <Route path="/dash_board" element={<Dashboard />} />
-        <Route path="/resume_create" element={<ResumeCreate />} />
+        <Route path="/resume_create/:id" element={<ResumeCreate />} />
+
+        {/* profile */}
+        <Route path="/profile" element={<Profile />} />
       </Routes>
       <Footer />
     </>

@@ -11,7 +11,7 @@ const {
 
 const { authMiddleware } = require("../middleware/auth");
 
-router.post("/create", create);
+router.post("/create", authMiddleware, create);
 router.put("/update/:id", authMiddleware, update);
 router.get("/getall", authMiddleware, getAll);
 router.get("/getone/:id", authMiddleware, getOne);

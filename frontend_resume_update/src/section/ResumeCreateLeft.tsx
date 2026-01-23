@@ -30,16 +30,23 @@ export const ResumeCreateLeft: React.FC<Props> = ({ resumeData, setData }) => {
     e.preventDefault();
 
     try {
-      const token = localStorage.getItem("token");
+      const token = sessionStorage.getItem("token");
 
       if (!token) {
         alert("Please login first!");
         return;
       }
+      console.log(resumeData);
+      console.log(resumeData?.basic_info.email);
+      console.log(resumeData?.basic_info.fullname);
 
       const res = await fetch("http://localhost:9090/api/resume/create", {
         method: "POST",
         body: JSON.stringify(resumeData),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
       });
 
       const data = await res.json();

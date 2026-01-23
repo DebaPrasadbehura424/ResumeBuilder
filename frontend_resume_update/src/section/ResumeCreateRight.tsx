@@ -4,7 +4,7 @@ import { SefirahClust } from "../Template/SefirahClust";
 
 interface Props {
   resumeData: any;
-  templateId: number;
+  templateId: string | undefined;
 }
 
 export const ResumeCreateRight: React.FC<Props> = ({
@@ -13,9 +13,9 @@ export const ResumeCreateRight: React.FC<Props> = ({
 }) => {
   const renderTemplate = () => {
     switch (templateId) {
-      case 1:
+      case "1":
         return <ModernClue data={resumeData} />;
-      case 2:
+      case "2":
         return <SefirahClust data={resumeData} />;
 
       default:

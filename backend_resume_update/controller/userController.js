@@ -76,3 +76,12 @@ exports.me = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+exports.profile = async (req, res) => {
+  const user = await userModel.findById(req.userId).populate("resumeList");
+
+  return res.status(200).json({
+    email: user.email,
+    resumes: user.resumeList,
+  });
+};

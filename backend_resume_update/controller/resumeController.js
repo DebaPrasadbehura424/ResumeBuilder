@@ -8,8 +8,9 @@ const { userModel } = require("../model/userModel");
 exports.create = async (req, res) => {
   try {
     const resumeData = req.body;
-    if (resumeData) {
-      res.status(500).json({ message: "data is not valid" });
+
+    if (!resumeData || !resumeData.basic_info) {
+      return res.status(400).json({ message: "data is not valid" });
     }
 
     const resume = await resumeModel.create({
@@ -21,12 +22,12 @@ exports.create = async (req, res) => {
       $push: { resumeList: resume._id },
     });
 
-    res.status(201).json({
+    return res.status(201).json({
       message: "Resume created successfully",
       resume,
     });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    return res.status(500).json({ message: error.message });
   }
 };
 
@@ -84,8 +85,15 @@ exports.getOne = async (req, res) => {
  */
 exports.getAll = async (req, res) => {
   try {
+    const user = await userModel.find({ userId: req.userId });
     const resumes = await resumeModel.find({ userId: req.userId });
-    res.status(200).json(resumes);
+    const email = user.basic_info.email;
+    console.log(resumes);
+
+    return res.status(200).json({
+      email,
+      resumes,
+    });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

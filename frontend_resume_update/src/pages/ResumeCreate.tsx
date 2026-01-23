@@ -2,9 +2,12 @@ import type React from "react";
 import { ResumeCreateLeft } from "../section/ResumeCreateLeft";
 import { ResumeCreateRight } from "../section/ResumeCreateRight";
 import { useState } from "react";
-
+import { useParams } from "react-router-dom";
 export const ResumeCreate: React.FC = () => {
-  const templateId: number = 1;
+  const { id } = useParams();
+
+  const templateId: string | undefined = id;
+
   const [resumeData, setResumeData] = useState({
     basic_info: {
       fullname: "",

@@ -2,13 +2,14 @@ import { useState } from "react";
 import type React from "react";
 import { NavLink } from "react-router-dom";
 import { Input } from "../components/Input";
-
+import { useNavigate } from "react-router-dom";
 interface LoginForm {
   email: string;
   password: string;
 }
 
 export const Login: React.FC = () => {
+  const navigate = useNavigate();
   const [form, setForm] = useState<LoginForm>({
     email: "",
     password: "",
@@ -25,7 +26,7 @@ export const Login: React.FC = () => {
     e.preventDefault();
 
     try {
-      const res = await fetch("http://localhost:5000/api/auth/login", {
+      const res = await fetch("http://localhost:9090/api/user/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -41,8 +42,9 @@ export const Login: React.FC = () => {
 
       console.log("Login Success:", data);
 
-      // ✅ Save token
-      localStorage.setItem("token", data.token);
+      sessionStorage.setItem("token", data.token);
+
+      navigate("/dash_board");
     } catch (error: any) {
       console.error("Login Error:", error.message);
     }

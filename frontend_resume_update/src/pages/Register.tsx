@@ -2,6 +2,7 @@ import { useState } from "react";
 import type React from "react";
 import { NavLink } from "react-router-dom";
 import { Input } from "../components/Input";
+import { useNavigate } from "react-router-dom";
 
 interface RegisterForm {
   email: string;
@@ -10,6 +11,7 @@ interface RegisterForm {
 }
 
 export const Register: React.FC = () => {
+  const navigate = useNavigate();
   const [form, setForm] = useState<RegisterForm>({
     email: "",
     password: "",
@@ -27,7 +29,7 @@ export const Register: React.FC = () => {
     e.preventDefault();
 
     try {
-      const res = await fetch("http://localhost:5000/api/auth/register", {
+      const res = await fetch("http://localhost:9090/api/user/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -43,7 +45,8 @@ export const Register: React.FC = () => {
 
       console.log("Register Success:", data);
 
-      localStorage.setItem("token", data.token);
+      sessionStorage.setItem("token", data.token);
+      navigate("/dash_board");
     } catch (error: any) {
       console.error("Register Error:", error.message);
     }
