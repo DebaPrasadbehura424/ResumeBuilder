@@ -66,7 +66,6 @@ exports.getOne = async (req, res) => {
   try {
     const resume = await resumeModel.findOne({
       _id: req.params.id,
-      userId: req.userId,
     });
 
     if (!resume) {
@@ -85,13 +84,9 @@ exports.getOne = async (req, res) => {
  */
 exports.getAll = async (req, res) => {
   try {
-    const user = await userModel.find({ userId: req.userId });
     const resumes = await resumeModel.find({ userId: req.userId });
-    const email = user.basic_info.email;
-    console.log(resumes);
 
     return res.status(200).json({
-      email,
       resumes,
     });
   } catch (error) {
@@ -104,6 +99,26 @@ exports.getAll = async (req, res) => {
  * DELETE /api/resume/:id
  */
 exports.remove = async (req, res) => {
+  try {
+    const resume = await resumeModel.findOneAndDelete({
+      _id: req.params.id,
+      userId: req.userId,
+    });
+
+    if (!resume) {
+      return res.status(404).json({ message: "Resume not found" });
+    }
+
+    await userModel.findByIdAndUpdate(req.userId, {
+      $pull: { resumeList: req.params.id },
+    });
+
+    res.status(200).json({ message: "Resume deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+exports.aiOptimize = async (req, res) => {
   try {
     const resume = await resumeModel.findOneAndDelete({
       _id: req.params.id,

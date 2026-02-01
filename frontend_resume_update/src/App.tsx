@@ -8,6 +8,7 @@ import { Register } from "./pages/Register";
 import { Dashboard } from "./pages/Dashboard";
 import { ResumeCreate } from "./pages/ResumeCreate";
 import { Profile } from "./pages/Profile";
+import { ResumeOne } from "./pages/ResumeOne";
 
 function App() {
   return (
@@ -27,6 +28,8 @@ function App() {
 
         {/* profile */}
         <Route path="/profile" element={<Profile />} />
+
+        <Route path="/resumeone/:id" element={<ResumeOne />} />
       </Routes>
       <Footer />
     </>

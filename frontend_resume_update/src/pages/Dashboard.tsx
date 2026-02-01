@@ -1,9 +1,11 @@
 import { useEffect, useState, type ChangeEvent } from "react";
 import Templates from "./Templates";
 import { Select } from "../components/Select";
+import { useNavigate } from "react-router-dom";
 
 export const Dashboard: React.FC = () => {
   const [search, setSearch] = useState<string>("");
+  const navigate = useNavigate();
 
   const handleFilter = (e: ChangeEvent<HTMLSelectElement>) => {
     setSearch(e.target.value.toLowerCase());
@@ -22,7 +24,7 @@ export const Dashboard: React.FC = () => {
           </p>
         </div>
 
-        <div className="max-w-md mx-auto mb-12">
+        <div className="max-w-md mx-auto mb-12 flex items-center gap-3">
           <Select
             name="role"
             value={search}

@@ -36,9 +36,7 @@ export const ResumeCreateLeft: React.FC<Props> = ({ resumeData, setData }) => {
         alert("Please login first!");
         return;
       }
-      console.log(resumeData);
-      console.log(resumeData?.basic_info.email);
-      console.log(resumeData?.basic_info.fullname);
+ 
 
       const res = await fetch("http://localhost:9090/api/resume/create", {
         method: "POST",
