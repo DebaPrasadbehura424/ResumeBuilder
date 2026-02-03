@@ -20,6 +20,23 @@ df = pd.read_csv(csv_path)
 
 word_strength = dict(zip(df['weak'].str.lower(), df['strong']))
 
+@app.get("/")
+def home():
+    return jsonify({
+        "status": "OK",
+        "message": "Resume Builder AI API is running 🚀",
+        "endpoints": {
+            "analyze": "POST /analyze",
+            "improve_summary": "POST /improve_summary"
+        }
+    })
+
+
+
+
+
+
+
 @app.post("/analyze")
 def analyze():
     data = request.json
