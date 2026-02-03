@@ -32,7 +32,7 @@ function Login() {
         if (error.response) {
           console.error(
             `Server error (${error.response.status}):`,
-            error.response.data
+            error.response.data,
           );
         } else if (error.request) {
           console.error("No response received from server:", error.request);

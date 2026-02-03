@@ -60,10 +60,13 @@ export const ResumeOne: React.FC = () => {
     }
     const resumeBody = resume?.summary || "";
     try {
-      const res = await axios.post("http://127.0.0.1:5000/analyze", {
-        resume: resumeBody,
-        jd,
-      });
+      const res = await axios.post(
+        "https://resumebuilder-578b.onrender.com/analyze",
+        {
+          resume: resumeBody,
+          jd,
+        },
+      );
       setShow((prev: any) => ({ ...prev, ...res.data }));
     } catch (err: any) {
       console.log(err.message);
@@ -74,9 +77,12 @@ export const ResumeOne: React.FC = () => {
   const handleEnhancing = async () => {
     const resumeBody = resume?.summary || "";
     try {
-      const res = await axios.post("http://127.0.0.1:5000/improve_summary", {
-        resume: resumeBody,
-      });
+      const res = await axios.post(
+        "https://resumebuilder-578b.onrender.com/improve_summary",
+        {
+          resume: resumeBody,
+        },
+      );
       setShow((prev: any) => ({ ...prev, ...res.data }));
     } catch (err: any) {
       console.log(err.message);

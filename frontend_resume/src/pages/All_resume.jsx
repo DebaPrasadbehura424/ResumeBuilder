@@ -19,7 +19,7 @@ function All_resume() {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
       const emailFromToken = res.data.user.email;
       setEmail(emailFromToken);
@@ -31,7 +31,7 @@ function All_resume() {
   async function getAllResumes() {
     try {
       const res = await axios.get(
-        `http://localhost:7878/api/resumerCreate/getResumes?email=${email}`
+        `http://localhost:7878/api/resumerCreate/getResumes?email=${email}`,
       );
       setResumes(res.data.data || []);
     } catch (err) {
@@ -48,7 +48,7 @@ function All_resume() {
             userEmail: email,
             id: id,
           },
-        }
+        },
       );
       setResumes((prev) => prev.filter((resume) => resume._id !== id));
     } catch (err) {
@@ -76,7 +76,9 @@ function All_resume() {
       getAllResumes();
     } else {
       setResumes((prevResumes) =>
-        prevResumes.filter((resume) => resume.name.toLowerCase().includes(text))
+        prevResumes.filter((resume) =>
+          resume.name.toLowerCase().includes(text),
+        ),
       );
     }
   };
