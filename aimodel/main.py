@@ -4,11 +4,20 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from textblob import TextBlob
 import pandas as pd
+import os
 
 app = Flask(__name__)
 CORS(app,resources={r"/*":{"origins":"http://localhost:5173"}})
 
-df=pd.read_csv("aimodel/words.csv")
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+csv_path = os.path.join(BASE_DIR, "words.csv")
+df = pd.read_csv(csv_path)
+
+
+
+# df=pd.read_csv("aimodel/words.csv")
+
 word_strength = dict(zip(df['weak'].str.lower(), df['strong']))
 
 @app.post("/analyze")
@@ -61,4 +70,8 @@ def improveSummary():
         "improved_summary": f"{final.capitalize()}. Focused on delivering high-quality work and continuous improvement."
     })
 
-app.run(port=5000)
+# app.run(port=5000)
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000)
+
