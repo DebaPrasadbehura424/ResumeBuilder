@@ -10,9 +10,12 @@ const resumeRouter = require("./routes/resumeRoutes");
 
 const PORT = process.env.PORT || 8787;
 
-app.use(
+const f_url = "https://resumebuilderfrontend-three.vercel.app";
+// const f_url = "http://localhost:5173";
+
+https: app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: f_url,
     credentials: true,
   }),
 );
