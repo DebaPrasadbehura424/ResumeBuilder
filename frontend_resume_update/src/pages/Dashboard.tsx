@@ -1,11 +1,9 @@
-import { useEffect, useState, type ChangeEvent } from "react";
+import { useState, type ChangeEvent } from "react";
 import Templates from "./Templates";
 import { Select } from "../components/Select";
-import { useNavigate } from "react-router-dom";
 
 export const Dashboard: React.FC = () => {
   const [search, setSearch] = useState<string>("");
-  const navigate = useNavigate();
 
   const handleFilter = (e: ChangeEvent<HTMLSelectElement>) => {
     setSearch(e.target.value.toLowerCase());
