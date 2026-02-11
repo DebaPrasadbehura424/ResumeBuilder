@@ -17,6 +17,8 @@ interface ProfileResponse {
 }
 
 export const Profile: React.FC = () => {
+  const backurl = "https://resumebuilderbackend-alpha.vercel.app";
+  // const backurl = "http://localhost:9090";
   const [data, setData] = useState<ProfileResponse | null>(null);
   const navigate = useNavigate();
   const token = sessionStorage.getItem("token");
@@ -28,7 +30,7 @@ export const Profile: React.FC = () => {
         return;
       }
 
-      const res = await fetch("http://localhost:9090/api/user/profile", {
+      const res = await fetch(`${backurl}/api/user/profile`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -97,14 +99,11 @@ export const Profile: React.FC = () => {
                   className="px-4 py-2 bg-red-700 rounded text-white"
                   onClick={async () => {
                     await axios
-                      .delete(
-                        `http://localhost:9090/api/resume/remove/${resume._id}`,
-                        {
-                          headers: {
-                            Authorization: `Bearer ${token}`,
-                          },
+                      .delete(`${backurl}/api/resume/remove/${resume._id}`, {
+                        headers: {
+                          Authorization: `Bearer ${token}`,
                         },
-                      )
+                      })
                       .then((res: any) => {
                         // setData((prev) =>
                         //   prev?.resumes.filter((x) => x._id != resume._id),

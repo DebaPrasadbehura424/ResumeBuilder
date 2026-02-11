@@ -9,6 +9,8 @@ interface LoginForm {
 }
 
 export const Login: React.FC = () => {
+  const backurl = "https://resumebuilderbackend-alpha.vercel.app";
+  // const backurl = "http://localhost:9090";
   const navigate = useNavigate();
   const [form, setForm] = useState<LoginForm>({
     email: "",
@@ -26,7 +28,7 @@ export const Login: React.FC = () => {
     e.preventDefault();
 
     try {
-      const res = await fetch("http://localhost:9090/api/user/login", {
+      const res = await fetch(`${backurl}/api/user/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

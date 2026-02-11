@@ -11,6 +11,9 @@ interface RegisterForm {
 }
 
 export const Register: React.FC = () => {
+  const backurl = "https://resumebuilderbackend-alpha.vercel.app";
+  // const backurl = "http://localhost:9090";
+
   const navigate = useNavigate();
   const [form, setForm] = useState<RegisterForm>({
     email: "",
@@ -29,7 +32,7 @@ export const Register: React.FC = () => {
     e.preventDefault();
 
     try {
-      const res = await fetch("http://localhost:9090/api/user/register", {
+      const res = await fetch(`${backurl}/api/user/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

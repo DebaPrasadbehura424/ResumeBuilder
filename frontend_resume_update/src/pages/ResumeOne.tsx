@@ -31,6 +31,9 @@ interface Resume {
 }
 
 export const ResumeOne: React.FC = () => {
+  const backurl = "https://resumebuilderbackend-alpha.vercel.app";
+  // const backurl = "http://localhost:9090";
+
   const [resume, setResume] = useState<Resume | null>(null);
   const [type, setType] = useState<number>(1);
   const [loading, setLoading] = useState(true);
@@ -47,7 +50,7 @@ export const ResumeOne: React.FC = () => {
     }
 
     axios
-      .get(`http://localhost:9090/api/resume/getone/${id}`, {
+      .get(`${backurl}/api/resume/getone/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
@@ -71,7 +74,6 @@ export const ResumeOne: React.FC = () => {
     }
   };
 
-  // 🔹 AI Match Score
   const handleAi = async () => {
     if (!jd.trim()) {
       alert("Please enter Job Description first");
