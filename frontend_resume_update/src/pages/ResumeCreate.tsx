@@ -9,6 +9,7 @@ export const ResumeCreate: React.FC = () => {
   const templateId: string | undefined = id;
 
   const [resumeData, setResumeData] = useState({
+    project_type: templateId,
     basic_info: {
       fullname: "",
       email: "",
@@ -17,7 +18,6 @@ export const ResumeCreate: React.FC = () => {
       state: "",
       city: "",
     },
-    projectsLayout: "",
     photo: "",
     summary: "",
     education: [{ collage_name: "", yog: "", cgpa: "" }],
@@ -26,10 +26,6 @@ export const ResumeCreate: React.FC = () => {
       { project_name: "", tech_stack: [], githublink: "", livelink: "" },
     ],
     certification: [{ cerficate_img: "" }],
-    headerColor: "",
-    headerTextColor: "",
-    bodyColor: "",
-    bodyTextColor: "",
   });
 
   return (

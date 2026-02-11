@@ -1,5 +1,6 @@
 import type React from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   resumeData: any;
@@ -7,6 +8,7 @@ interface Props {
 }
 
 export const ResumeCreateLeft: React.FC<Props> = ({ resumeData, setData }) => {
+  const navigate = useNavigate();
   const [step, setStep] = useState(0);
   const [showConfirm, setShowConfirm] = useState(false);
   const [showSubmit, setShowSubmit] = useState(false);
@@ -36,7 +38,6 @@ export const ResumeCreateLeft: React.FC<Props> = ({ resumeData, setData }) => {
         alert("Please login first!");
         return;
       }
- 
 
       const res = await fetch("http://localhost:9090/api/resume/create", {
         method: "POST",
@@ -53,7 +54,6 @@ export const ResumeCreateLeft: React.FC<Props> = ({ resumeData, setData }) => {
         throw new Error(data.message || "Failed to create resume");
       }
 
-      console.log("Resume Created Successfully:", data);
       alert("Resume created successfully! ✅");
     } catch (error: any) {
       console.error("Resume Creation Error:", error.message);
