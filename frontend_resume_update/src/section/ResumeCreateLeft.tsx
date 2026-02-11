@@ -1,6 +1,5 @@
 import type React from "react";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 interface Props {
   resumeData: any;
@@ -8,7 +7,6 @@ interface Props {
 }
 
 export const ResumeCreateLeft: React.FC<Props> = ({ resumeData, setData }) => {
-  const navigate = useNavigate();
   const [step, setStep] = useState(0);
   const [showConfirm, setShowConfirm] = useState(false);
   const [showSubmit, setShowSubmit] = useState(false);
