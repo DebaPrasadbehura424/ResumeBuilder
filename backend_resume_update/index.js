@@ -13,7 +13,10 @@ const PORT = process.env.PORT || 8787;
 const f_url = "https://resumebuilderfrontend-three.vercel.app";
 // const f_url = "http://localhost:5173";
 
-https: app.use(
+
+
+
+app.use(
   cors({
     origin: f_url,
     credentials: true,
