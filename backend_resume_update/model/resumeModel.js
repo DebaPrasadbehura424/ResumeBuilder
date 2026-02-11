@@ -9,6 +9,10 @@ const resumeSchema = new Schema(
       required: true,
     },
 
+    project_type: {
+      type: String,
+    },
+
     basic_info: {
       fullname: { type: String, required: true },
       email: { type: String, required: true },
@@ -16,10 +20,6 @@ const resumeSchema = new Schema(
       country: { type: String },
       state: { type: String },
       city: { type: String },
-    },
-
-    projectsLayout: {
-      type: String,
     },
 
     photo: {
@@ -58,22 +58,6 @@ const resumeSchema = new Schema(
         cerficate_img: { type: String },
       },
     ],
-
-    headerColor: {
-      type: String,
-    },
-
-    headerTextColor: {
-      type: String,
-    },
-
-    bodyColor: {
-      type: String,
-    },
-
-    bodyTextColor: {
-      type: String,
-    },
   },
   { timestamps: true },
 );
