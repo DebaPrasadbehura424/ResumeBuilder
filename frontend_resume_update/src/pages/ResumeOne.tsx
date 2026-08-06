@@ -37,8 +37,8 @@ interface ResumeOutput {
 }
 
 export const ResumeOne: React.FC = () => {
-  // const backurl = "https://resumebuilderbackend-alpha.vercel.app";
-  const backurl = "http://localhost:9090";
+  const backurl = "https://resumebuilderbackend-alpha.vercel.app";
+  // const backurl = "http://localhost:9090";
 
   const [resume, setResume] = useState<Resume | null>(null);
   const [type, setType] = useState<number>(1);
@@ -80,6 +80,8 @@ export const ResumeOne: React.FC = () => {
     }
   };
 
+  // const pyUrl = " https://resumebuilder-578b.onrender.com";
+  const pyUrl = "http://127.0.0.1:5000";
   const handleAi = async () => {
     if (!jd.trim()) {
       alert("Please enter Job Description first");
@@ -87,7 +89,7 @@ export const ResumeOne: React.FC = () => {
     }
 
     try {
-      const res = await axios.post("http://127.0.0.1:5000/analyze", {
+      const res = await axios.post(`${pyUrl}/analyze`, {
         resume: resume?.summary || "",
         jd,
       });
@@ -108,7 +110,7 @@ export const ResumeOne: React.FC = () => {
 
   const handleEnhancing = async () => {
     try {
-      const res = await axios.post("http://127.0.0.1:5000/improve_summary", {
+      const res = await axios.post(`${pyUrl}/improve_summary`, {
         resume: resume?.summary || "",
       });
 

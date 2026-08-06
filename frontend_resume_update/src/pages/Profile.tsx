@@ -17,8 +17,8 @@ interface ProfileResponse {
 }
 
 export const Profile: React.FC = () => {
-  // const backurl = "https://resumebuilderbackend-alpha.vercel.app";
-  const backurl = "http://localhost:9090";
+  const backurl = "https://resumebuilderbackend-alpha.vercel.app";
+  // const backurl = "http://localhost:9090";
   const [data, setData] = useState<ProfileResponse | null>(null);
   const navigate = useNavigate();
   const token = sessionStorage.getItem("token");
