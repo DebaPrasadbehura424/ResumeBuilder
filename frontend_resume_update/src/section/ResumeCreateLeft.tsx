@@ -7,8 +7,8 @@ interface Props {
 }
 
 export const ResumeCreateLeft: React.FC<Props> = ({ resumeData, setData }) => {
-  const backurl = "https://resumebuilderbackend-alpha.vercel.app";
-  // const backurl = "http://localhost:9090";
+  // const backurl = "https://resumebuilderbackend-alpha.vercel.app";
+  const backurl = "http://localhost:9090";
   const [step, setStep] = useState(0);
   const [showConfirm, setShowConfirm] = useState(false);
   const [showSubmit, setShowSubmit] = useState(false);

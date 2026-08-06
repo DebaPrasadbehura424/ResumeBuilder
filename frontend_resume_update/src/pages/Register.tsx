@@ -11,8 +11,8 @@ interface RegisterForm {
 }
 
 export const Register: React.FC = () => {
-  const backurl = "https://resumebuilderbackend-alpha.vercel.app";
-  // const backurl = "http://localhost:9090";
+  // const backurl = "https://resumebuilderbackend-alpha.vercel.app";
+  const backurl = "http://localhost:9090";
 
   const navigate = useNavigate();
   const [form, setForm] = useState<RegisterForm>({

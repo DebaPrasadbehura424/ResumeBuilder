@@ -3,6 +3,8 @@ from flask_cors import CORS
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from textblob import TextBlob
+
+
 import pandas as pd
 import os
 
@@ -16,7 +18,7 @@ df = pd.read_csv(csv_path)
 
 
 
-# df=pd.read_csv("aimodel/words.csv")
+df=pd.read_csv("C:/Users/debap/OneDrive/Desktop/Final product/mern/ResumeBuilder/aimodel/words.csv")
 
 word_strength = dict(zip(df['weak'].str.lower(), df['strong']))
 
@@ -42,14 +44,11 @@ def analyze():
     data = request.json
     resume = data["resume"]
     jd = data["jd"]
-    tfidf = TfidfVectorizer()  # converts text to numbers
-    vectors = tfidf.fit_transform([resume,jd]) # trains the model
-    score = cosine_similarity(vectors[0:1], vectors[1:2])[0][0]  # check similarity
-    # Cosine similarity =(R • J) / ( |R| × |J| )
-    # magnitude means square root+add + root over
+    tfidf = TfidfVectorizer() 
+    vectors = tfidf.fit_transform([resume,jd]) 
+    score = cosine_similarity(vectors[0:1], vectors[1:2])[0][0]
     words_count = len(resume.split())
 
-    # Category based on length
     if words_count < 20:
         length_category = "too_short"
     elif words_count < 50:

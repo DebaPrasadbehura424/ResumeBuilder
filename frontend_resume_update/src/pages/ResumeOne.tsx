@@ -29,15 +29,21 @@ interface Resume {
     livelink?: string;
   }[];
 }
+interface ResumeOutput {
+  length_category?: string;
+  match_score?: string | number;
+  resume_length?: string | number;
+  improved_summary?: string;
+}
 
 export const ResumeOne: React.FC = () => {
-  const backurl = "https://resumebuilderbackend-alpha.vercel.app";
-  // const backurl = "http://localhost:9090";
+  // const backurl = "https://resumebuilderbackend-alpha.vercel.app";
+  const backurl = "http://localhost:9090";
 
   const [resume, setResume] = useState<Resume | null>(null);
   const [type, setType] = useState<number>(1);
   const [loading, setLoading] = useState(true);
-  const [show, setShow] = useState<any>({});
+  const [show, setShow] = useState<ResumeOutput>({});
   const [jd, setJd] = useState("");
 
   const { id } = useParams();
@@ -81,15 +87,20 @@ export const ResumeOne: React.FC = () => {
     }
 
     try {
-      const res = await axios.post(
-        "https://resumebuilder-578b.onrender.com/analyze",
-        {
-          resume: resume?.summary || "",
-          jd,
-        },
-      );
+      const res = await axios.post("http://127.0.0.1:5000/analyze", {
+        resume: resume?.summary || "",
+        jd,
+      });
 
-      setShow(res.data);
+      console.log(res.data);
+
+      // Only update the 3 fields from /analyze, keep the rest
+      setShow((prev) => ({
+        ...prev,
+        match_score: res.data.match_score,
+        length_category: res.data.length_category,
+        resume_length: res.data.resume_length,
+      }));
     } catch (err: any) {
       console.log(err.message);
     }
@@ -97,19 +108,21 @@ export const ResumeOne: React.FC = () => {
 
   const handleEnhancing = async () => {
     try {
-      const res = await axios.post(
-        "https://resumebuilder-578b.onrender.com/improve_summary",
-        {
-          resume: resume?.summary || "",
-        },
-      );
+      const res = await axios.post("http://127.0.0.1:5000/improve_summary", {
+        resume: resume?.summary || "",
+      });
 
-      setShow(res.data);
+      console.log(res.data);
+
+      // Only update improved_summary, keep the previous score etc.
+      setShow((prev) => ({
+        ...prev,
+        improved_summary: res.data.improved_summary,
+      }));
     } catch (err: any) {
       console.log(err.message);
     }
   };
-
   if (loading)
     return (
       <div className="text-center mt-20 text-lg font-semibold">
