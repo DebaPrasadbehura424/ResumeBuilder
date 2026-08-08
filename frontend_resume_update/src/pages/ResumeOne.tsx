@@ -7,6 +7,7 @@ import { SefirahClust } from "../Template/SefirahClust";
 interface Resume {
   _id: string;
   project_type?: number;
+  photo?: string;
   basic_info?: {
     fullname?: string;
     email?: string;
@@ -15,6 +16,7 @@ interface Resume {
     state?: string;
     city?: string;
   };
+  certification?: { cerficate_img: string };
   summary?: string;
   skills?: string[];
   education?: {
@@ -37,11 +39,12 @@ interface ResumeOutput {
 }
 
 export const ResumeOne: React.FC = () => {
-  const backurl = "https://resumebuilderbackend-alpha.vercel.app";
-  // const backurl = "http://localhost:9090";
+  // const backurl = "https://resumebuilderbackend-alpha.vercel.app";
+  const backurl = "http://localhost:9090";
 
   const [resume, setResume] = useState<Resume | null>(null);
   const [type, setType] = useState<number>(1);
+  const [ats, setAts] = useState<number>(0);
   const [loading, setLoading] = useState(true);
   const [show, setShow] = useState<ResumeOutput>({});
   const [jd, setJd] = useState("");
@@ -82,6 +85,33 @@ export const ResumeOne: React.FC = () => {
 
   // const pyUrl = " https://resumebuilder-578b.onrender.com";
   const pyUrl = "http://127.0.0.1:5000";
+
+  const handleAts = async () => {
+    let basic_info = resume?.basic_info;
+    let certification = resume?.certification;
+    let education = resume?.education;
+    let projects = resume?.projects;
+    let skills = resume?.skills;
+    let summary = resume?.summary;
+    let photo = resume?.photo;
+
+    try {
+      const res = await axios.post(`${pyUrl}/checkAts`, {
+        basic_info,
+        certification,
+        education,
+        projects,
+        skills,
+        summary,
+        photo,
+      });
+      console.log(res.data);
+      setAts(res.data?.ats_score);
+    } catch (err: any) {
+      console.log(err.message);
+    }
+  };
+
   const handleAi = async () => {
     if (!jd.trim()) {
       alert("Please enter Job Description first");
@@ -93,9 +123,7 @@ export const ResumeOne: React.FC = () => {
         resume: resume?.summary || "",
         jd,
       });
-
       console.log(res.data);
-
       // Only update the 3 fields from /analyze, keep the rest
       setShow((prev) => ({
         ...prev,
@@ -173,6 +201,12 @@ export const ResumeOne: React.FC = () => {
           >
             Improve Summary
           </button>
+          <button
+            onClick={handleAts}
+            className="px-5 py-2 bg-yellow-600 text-white rounded-lg hover:bg-green-700 transition"
+          >
+            Check Ats
+          </button>
         </div>
 
         <div className="bg-gray-50 p-5 rounded-xl border space-y-2">
@@ -191,6 +225,10 @@ export const ResumeOne: React.FC = () => {
             {show?.resume_length ?? "Not available"}
           </p>
 
+          <p>
+            <span className="font-semibold">Ats Score:</span>{" "}
+            {ats ?? "Not available"}
+          </p>
           <p>
             <span className="font-semibold">Improved Summary:</span>{" "}
             {show?.improved_summary ?? "Not available"}
